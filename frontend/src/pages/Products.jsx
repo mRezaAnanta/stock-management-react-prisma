@@ -72,18 +72,23 @@ const Products = () => {
       </Link>
       {error && <p className="text-red-500">{error}</p>}
 
-      <div className="products-controls">
-        <div className="search-box">
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 p-4 bg-white shadow rounded-md">
+        <div className="w-full md:w-1/3">
           <input
             type="text"
             placeholder="Search products..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
 
-        <div className="filter-controls">
-          <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+        <div className="flex-col md:flex-row gap-4 w-full md:w-2/3 justify-end">
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+            className="px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 mr-2"
+          >
             <option value="name">Sort by Name</option>
             <option value="sku">Sort by SKU</option>
             <option value="price-low">Sort by Price (Lowest)</option>
@@ -93,7 +98,11 @@ const Products = () => {
             <option value="date">Sort by Date Added</option>
           </select>
 
-          <select value={filterStock} onChange={(e) => setFilterStock(e.target.value)}>
+          <select
+            value={filterStock}
+            onChange={(e) => setFilterStock(e.target.value)}
+            className="px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
             <option value="all">All Products</option>
             <option value="in">In Stock (10+)</option>
             <option value="low">Low Stock (&lt;10)</option>

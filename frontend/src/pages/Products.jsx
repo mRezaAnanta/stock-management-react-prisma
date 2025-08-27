@@ -18,9 +18,7 @@ const Products = () => {
     }
   };
 
-  // Filter and sort products
   const filteredProducts = products.filter(product => {
-    console.log(product)
     const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       product.sku.toLowerCase().includes(searchTerm.toLowerCase()) ||
       (product.description && product.description.toLowerCase().includes(searchTerm.toLowerCase()));
@@ -42,10 +40,14 @@ const Products = () => {
         return a.name.localeCompare(b.name);
       case 'sku':
         return a.sku.localeCompare(b.sku);
-      case 'price':
+      case 'price-low':
         return a.price - b.price;
-      case 'stock':
+      case 'price-high':
+        return b.price - a.price;
+      case 'stock-low':
         return a.stock - b.stock;
+      case 'stock-high':
+        return b.stock - a.stock;
       case 'date':
         return new Date(b.createdAt) - new Date(a.createdAt);
       default:
@@ -84,8 +86,10 @@ const Products = () => {
           <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
             <option value="name">Sort by Name</option>
             <option value="sku">Sort by SKU</option>
-            <option value="price">Sort by Price</option>
-            <option value="stock">Sort by Stock</option>
+            <option value="price-low">Sort by Price (Lowest)</option>
+            <option value="price-high">Sort by Price (Highest)</option>
+            <option value="stock-low">Sort by Stock (Lowest)</option>
+            <option value="stock-high">Sort by Stock (Highest)</option>
             <option value="date">Sort by Date Added</option>
           </select>
 
@@ -112,7 +116,7 @@ const Products = () => {
             </tr>
           </thead>
           <tbody>
-            {products.map((product, index) => {
+            {filteredProducts.map((product, index) => {
               const totalValue = product.price * product.stock;
               return (
                 <tr key={product.id} className="hover:bg-gray-50">

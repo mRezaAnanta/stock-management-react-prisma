@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useProducts } from '../context/ProductContext'
+import { useAuth } from '../context/AuthContext'
 
 const Dashboard = () => {
   const { products, fetchProducts, loading } = useProducts()
+  const { user } = useAuth();
 
   useEffect(() => {
     fetchProducts()
@@ -29,7 +31,7 @@ const Dashboard = () => {
     <div className="p-6 max-w-6xl mx-auto">
       <div className="mb-6">
         <h1 className="text-3xl font-bold text-gray-800 mb-1">Dashboard</h1>
-        <p className="text-gray-500">Welcome to your inventory dashboard</p>
+        <p className="text-gray-500">Welcome to your inventory dashboard, {user?.name}</p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-8">

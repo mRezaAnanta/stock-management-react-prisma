@@ -4,6 +4,7 @@ const prisma = new PrismaClient()
 export const getAllProducts = async (req, res) => {
   try {
     const products = await prisma.product.findMany({
+      where: { userId: req.user.id },
       orderBy: { createdAt: 'desc' }
     })
 
@@ -26,6 +27,8 @@ export const getProductById = async (req, res) => {
     const product = await prisma.product.findFirst({
       where: { 
         id: productId,
+        // FIX: id is undefined
+        userId: req.user.id 
       }
     });
 
@@ -74,6 +77,8 @@ export const createNewProduct = async (req, res) => {
         price: parseFloat(price),
         stock: parseInt(stock) || 0,
         sku,
+        // FIX: id is undefined
+        userId: req.user.id
       }
     });
 
@@ -100,6 +105,7 @@ export const updateProductById = async (req, res) => {
     const existingProduct = await prisma.product.findFirst({
       where: { 
         id: productId,
+        userId: req.user.id 
       }
     });
 
@@ -160,6 +166,7 @@ export const deleteProductById = async (req, res) => {
     const existingProduct = await prisma.product.findFirst({
       where: { 
         id: productId,
+        userId: req.user.id 
       }
     });
 

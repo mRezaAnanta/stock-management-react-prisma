@@ -1,11 +1,11 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React from 'react'
+import { Link, useLocation } from 'react-router-dom'
 
 const Navbar = () => {
-  const location = useLocation();
+  const location = useLocation()
 
   const isActive = (path) =>
-    location.pathname === path || location.pathname.startsWith(path);
+    location.pathname === path || location.pathname.startsWith(path)
 
   return (
     <nav className="bg-white shadow-md">
@@ -38,7 +38,7 @@ const Navbar = () => {
         </div>
       </div>
     </nav>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar

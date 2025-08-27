@@ -1,7 +1,7 @@
-import axios from 'axios';
+import axios from 'axios'
 
-// const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
-const API_BASE_URL = 'http://localhost:5000/api';
+// const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api'
+const API_BASE_URL = 'http://localhost:5000/api'
 
 // Create axios instance
 const api = axios.create({
@@ -9,7 +9,7 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-});
+})
 
 // Products API
 export const productsAPI = {
@@ -19,6 +19,6 @@ export const productsAPI = {
   updateProduct: (id, productData) => api.put(`/products/${id}`, productData),
   deleteProduct: (id) => api.delete(`/products/${id}`),
   updateStock: (id, stockData) => api.patch(`/products/${id}/stock`, stockData),
-};
+}
 
-export default api;
+export default api

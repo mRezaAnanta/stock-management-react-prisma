@@ -1,28 +1,28 @@
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { useProducts } from '../context/ProductContext';
+import React, { useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import { useProducts } from '../context/ProductContext'
 
 const Dashboard = () => {
-  const { products, fetchProducts, loading } = useProducts();
+  const { products, fetchProducts, loading } = useProducts()
 
   useEffect(() => {
-    fetchProducts();
-  }, []);
+    fetchProducts()
+  }, [])
 
-  const totalProducts = products.length;
+  const totalProducts = products.length
   const totalValue = products.reduce(
     (sum, product) => sum + product.price * product.stock,
     0
-  );
-  const lowStockProducts = products.filter((product) => product.stock < 10);
-  const outOfStockProducts = products.filter((product) => product.stock === 0);
+  )
+  const lowStockProducts = products.filter((product) => product.stock < 10)
+  const outOfStockProducts = products.filter((product) => product.stock === 0)
 
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
         <span className="text-gray-600 text-sm font-medium">Loading dashboard...</span>
       </div>
-    );
+    )
   }
 
   return (
@@ -60,7 +60,6 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Actions */}
       <div className="flex flex-wrap gap-4">
         <Link
           to="/products/add"
@@ -76,7 +75,7 @@ const Dashboard = () => {
         </Link>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Dashboard;
+export default Dashboard

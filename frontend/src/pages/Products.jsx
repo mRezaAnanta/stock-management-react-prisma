@@ -71,7 +71,7 @@ const Products = () => {
 
   return (
     <div className="p-4 bg-white rounded shadow-md">
-      <h2 className="text-xl font-semibold mb-4">Product Table</h2>
+      <h2 className="text-3xl font-bold text-gray-800 mb-4">Product Table</h2>
 
       {error && <p className="text-red-500">{error}</p>}
 

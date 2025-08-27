@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams, Link } from 'react-router-dom';
-import { useProducts } from '../context/ProductContext';
-import { productsAPI } from '../services/api';
+import React, { useState, useEffect } from 'react'
+import { useNavigate, useParams, Link } from 'react-router-dom'
+import { useProducts } from '../context/ProductContext'
+import { productsAPI } from '../services/api'
 
 const EditProduct = () => {
   const [formData, setFormData] = useState({
@@ -10,19 +10,19 @@ const EditProduct = () => {
     price: '',
     stock: '',
     sku: '',
-  });
-  const [loading, setLoading] = useState(true);
-  const [productError, setProductError] = useState('');
-  const { updateProduct, loading: updateLoading, error, clearError } = useProducts();
-  const navigate = useNavigate();
-  const { id } = useParams();
+  })
+  const [loading, setLoading] = useState(true)
+  const [productError, setProductError] = useState('')
+  const { updateProduct, loading: updateLoading, error, clearError } = useProducts()
+  const navigate = useNavigate()
+  const { id } = useParams()
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        setLoading(true);
-        const response = await productsAPI.getProduct(id);
-        const product = response.data.product;
+        setLoading(true)
+        const response = await productsAPI.getProduct(id)
+        const product = response.data.product
         
         setFormData({
           name: product.name,
@@ -30,47 +30,47 @@ const EditProduct = () => {
           price: product.price.toString(),
           stock: product.stock.toString(),
           sku: product.sku,
-        });
+        })
       } catch (error) {
-        setProductError(error.response?.data?.message || 'Failed to fetch product');
+        setProductError(error.response?.data?.message || 'Failed to fetch product')
       } finally {
-        setLoading(false);
+        setLoading(false)
       }
-    };
+    }
 
     if (id) {
-      fetchProduct();
-      clearError();
+      fetchProduct()
+      clearError()
     }
-  }, [id]);
+  }, [id])
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
-    });
-  };
+    })
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     
     const result = await updateProduct(id, {
       ...formData,
       price: parseFloat(formData.price),
       stock: parseInt(formData.stock),
-    });
+    })
     
     if (result.success) {
-      navigate('/products');
+      navigate('/products')
     }
-  };
+  }
 
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
         <span className="text-gray-600 text-sm font-medium">Loading products...</span>
       </div>
-    );
+    )
   }
 
   if (productError) {
@@ -83,7 +83,7 @@ const EditProduct = () => {
           </Link>
         </div>
       </div>
-    );
+    )
   }
 
   return (
@@ -202,7 +202,7 @@ const EditProduct = () => {
         </div>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default EditProduct;
+export default EditProduct
